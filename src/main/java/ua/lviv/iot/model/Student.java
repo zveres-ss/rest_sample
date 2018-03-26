@@ -1,4 +1,4 @@
-package ua.lviv.iot;
+package ua.lviv.iot.model;
 
 public class Student {
 
