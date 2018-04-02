@@ -2,8 +2,11 @@ package ua.lviv.iot.persistence.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
-public abstract class AbstractDao<T> {
+
+public abstract class AbstractDao<T> implements IDao<T> {
 
         @PersistenceContext
         private EntityManager entityManager;
@@ -14,17 +17,17 @@ public abstract class AbstractDao<T> {
 
     protected abstract Class<T> getEntityClass();
 
+    @Transactional(value=TxType.REQUIRED)
+    @Override
     public T findById(Integer id) {
-        entityManager.getTransaction().begin();
         T result = (T) entityManager.find(getEntityClass(), id);
-        entityManager.getTransaction().commit();
         return result;
     }
 
+    @Transactional(value=TxType.REQUIRED)
+    @Override
     public T persist(T object) {
-        entityManager.getTransaction().begin();
         entityManager.persist(object);
-        entityManager.getTransaction().commit();
         return object;
     }
 
