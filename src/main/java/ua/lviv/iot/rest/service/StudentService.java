@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -29,7 +30,7 @@ public class StudentService implements Serializable {
     @Path("{id}/")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Student getStudent(@PathParam("id") Integer id) {
-        return new Student("uassa", "first");
+        return dao.findById(id);
     }
     
     @POST

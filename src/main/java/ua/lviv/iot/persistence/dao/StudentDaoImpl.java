@@ -26,10 +26,5 @@ public class StudentDaoImpl extends AbstractDao<Student> implements StudentDao, 
 
     //@Resource
     //private UserTransaction userTransaction;
-    
-    @PostConstruct
-    public void init() {
-        System.out.println("ready");
-    }
 
 }
